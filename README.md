@@ -4,5 +4,4 @@ Music Player using firebase for the database, implements firebase authentication
 
 ## Getting Started
 
-Projek ini menggunakan state management Bloc (Cubit) dan sudah menerapkan clean architecture agar bisa dipelihara
-untuk jangka panjang. Selain itu ditambahkan pula sebuah database berupa API yang menandakan projek ini juga bisa menerapkan dependecy http (menggunakan reqres.in api), tetapi hanya menerapkan konsep get saja dikarenakan metode lainnya tidak mengubah isi dari reqres.in itu sendiri
+This project uses state management Bloc (Cubit) and has implemented a clean architecture so that it can be maintained for the long term. In addition, a database in the form of an API is also added which indicates that this project can also implement http dependency (using reqres.in api), but only implements the get concept because other methods do not change the contents of reqres.in itself.
