@@ -41,42 +41,43 @@ class ArtistsPage extends StatelessWidget {
             child: ElevatedButton(
               onPressed: () {
                 showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return Dialog(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        child: SizedBox(
-                          height: 350,
-                          child: Padding(
-                            padding: const EdgeInsets.all(12.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const TextField(
-                                  decoration: InputDecoration(
-                                      border: InputBorder.none,
-                                      hintText: 'Email:'),
-                                ),
-                                const SizedBox(height: 12),
-                                const TextField(
-                                  decoration: InputDecoration(
-                                      border: InputBorder.none,
-                                      hintText: 'Password:'),
-                                ),
-                                const SizedBox(height: 20),
-                                BasicAppButton(
-                                  onPressed: () {},
-                                  tittle: "Add Artist",
-                                )
-                              ],
-                            ),
+                  context: context,
+                  builder: (BuildContext context) {
+                    return Dialog(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      child: SizedBox(
+                        height: 350,
+                        child: Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const TextField(
+                                decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    hintText: 'Email:'),
+                              ),
+                              const SizedBox(height: 12),
+                              const TextField(
+                                decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    hintText: 'Password:'),
+                              ),
+                              const SizedBox(height: 20),
+                              BasicAppButton(
+                                onPressed: () {},
+                                tittle: "Add Artist",
+                              )
+                            ],
                           ),
                         ),
-                      );
-                    });
+                      ),
+                    );
+                  },
+                );
               },
               child: const Text('Add users'),
             ),

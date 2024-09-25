@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:spotify/common/widgets/appbar/basic_appbar.dart';
 import 'package:spotify/common/widgets/button/basic_app_button.dart';
 import 'package:spotify/core/configs/assets/app_vectors.dart';
 import 'package:spotify/data/models/auth/create_user_req.dart';
 import 'package:spotify/domain/usecases/auth/signup.dart';
+import 'package:spotify/presentation/auth/bloc/password_cubit.dart';
 import 'package:spotify/presentation/auth/pages/signin.dart';
 import 'package:spotify/presentation/home/pages/home.dart';
 import 'package:spotify/service_locator.dart';
@@ -103,11 +105,29 @@ class SignUpPage extends StatelessWidget {
   }
 
   Widget _passwordTextField(BuildContext context) {
-    return TextField(
-      controller: _password,
-      decoration: const InputDecoration(
-        hintText: "Password",
-      ).applyDefaults(Theme.of(context).inputDecorationTheme),
+    return BlocProvider(
+      create: (context) => PasswordCubit(),
+      child: BlocBuilder<PasswordCubit, bool>(
+        builder: (context, isPasswordHidden) {
+          return TextField(
+            obscureText: isPasswordHidden,
+            controller: _password,
+            decoration: InputDecoration(
+              hintText: "Password",
+              suffixIcon: IconButton(
+                onPressed: () {
+                  context.read<PasswordCubit>().togglePasswordVisibility();
+                },
+                icon: Icon(
+                  isPasswordHidden ? Icons.visibility : Icons.visibility_off,
+                ),
+              ),
+            ).applyDefaults(
+              Theme.of(context).inputDecorationTheme,
+            ),
+          );
+        },
+      ),
     );
   }
 

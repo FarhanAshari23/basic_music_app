@@ -11,6 +11,7 @@ abstract class AuthFirebaseService {
   Future<Either> signup(CreateUserReq createUserReq);
   Future<Either> signin(SignInUserReq signInUserReq);
   Future<Either> getUser();
+  Future<bool> isLoggedIn();
 }
 
 class AuthFirebaseServiceImpl extends AuthFirebaseService {
@@ -80,6 +81,15 @@ class AuthFirebaseServiceImpl extends AuthFirebaseService {
       return right(userEntity);
     } catch (e) {
       return left('An Error Occured');
+    }
+  }
+
+  @override
+  Future<bool> isLoggedIn() async {
+    if (FirebaseAuth.instance.currentUser != null) {
+      return true;
+    } else {
+      return false;
     }
   }
 }

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:spotify/common/widgets/appbar/basic_appbar.dart';
 import 'package:spotify/common/widgets/button/basic_app_button.dart';
 import 'package:spotify/core/configs/assets/app_vectors.dart';
 import 'package:spotify/data/models/auth/signin_user_req.dart';
+import 'package:spotify/presentation/auth/bloc/password_cubit.dart';
 import 'package:spotify/presentation/auth/pages/signup.dart';
 
 import '../../../domain/usecases/auth/signin.dart';
@@ -47,8 +49,8 @@ class SignInPage extends StatelessWidget {
                     ),
                   );
                   return result.fold(
-                    (l) {
-                      var snackbar = SnackBar(content: Text(l));
+                    (error) {
+                      var snackbar = SnackBar(content: Text(error));
                       ScaffoldMessenger.of(context).showSnackBar(snackbar);
                     },
                     (r) {
@@ -89,11 +91,29 @@ class SignInPage extends StatelessWidget {
   }
 
   Widget _passwordTextField(BuildContext context) {
-    return TextField(
-      controller: _passC,
-      decoration: const InputDecoration(
-        hintText: "Password",
-      ).applyDefaults(Theme.of(context).inputDecorationTheme),
+    return BlocProvider(
+      create: (context) => PasswordCubit(),
+      child: BlocBuilder<PasswordCubit, bool>(
+        builder: (context, isPasswordHidden) {
+          return TextField(
+            obscureText: isPasswordHidden,
+            controller: _passC,
+            decoration: InputDecoration(
+              hintText: "Password",
+              suffixIcon: IconButton(
+                onPressed: () {
+                  context.read<PasswordCubit>().togglePasswordVisibility();
+                },
+                icon: Icon(
+                  isPasswordHidden ? Icons.visibility : Icons.visibility_off,
+                ),
+              ),
+            ).applyDefaults(
+              Theme.of(context).inputDecorationTheme,
+            ),
+          );
+        },
+      ),
     );
   }
 

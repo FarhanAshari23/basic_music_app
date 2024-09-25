@@ -3,9 +3,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:spotify/common/helpers/is_dark_mode.dart';
 import 'package:spotify/core/configs/assets/app_images.dart';
 import 'package:spotify/core/configs/theme/app_colors.dart';
-import 'package:spotify/presentation/home/widgets/artists_list.dart';
 import 'package:spotify/presentation/home/widgets/news_songs.dart';
 import 'package:spotify/presentation/home/widgets/play_list.dart';
+import 'package:spotify/presentation/home/widgets/user_songs.dart';
 import 'package:spotify/presentation/profile/pages/profile.dart';
 
 import '../../../common/widgets/appbar/basic_appbar.dart';
@@ -58,13 +58,13 @@ class _HomePageState extends State<HomePage>
               height: 260,
               child: TabBarView(
                 controller: _tabController,
-                children: const [
-                  NewsSongs(),
-                  ArtistsPage(),
-                  Center(
+                children: [
+                  const NewsSongs(),
+                  UserSongs(),
+                  const Center(
                     child: Text("Coming Soon"),
                   ),
-                  Center(
+                  const Center(
                     child: Text("Coming Soon"),
                   ),
                 ],
@@ -153,14 +153,14 @@ class _HomePageState extends State<HomePage>
           ),
         ),
         Text(
-          "Artists",
+          "Library",
           style: TextStyle(
             fontWeight: FontWeight.w500,
             fontSize: 16,
           ),
         ),
         Text(
-          "Videos",
+          "Artists",
           style: TextStyle(
             fontWeight: FontWeight.w500,
             fontSize: 16,
